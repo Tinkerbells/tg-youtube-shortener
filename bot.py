@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 async def start_command(message: Message):
-    await message.answer("Hello!")
+    await message.answer("Добро пожаловать. Вы активировали бот.")
 
 
 async def help_command(message: Message):
