@@ -16,4 +16,4 @@ async def process_any_message(message: Message):
         youtube_link = match.group(0)
         await message.answer(f"Я нашёл YouTube ссылку: {youtube_link}")
     else:
-        await message.answer("В вашем сообщении нет YouTube ссылки.")
+        await message.answer("В вашем сообщении нет YouTube ссылки")
