@@ -4,6 +4,8 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from aiogram.filters.command import CommandStart, Command
+from future.backports.http.client import responses
+
 from config import Config, load_config
 from src.handlers import echo
 
@@ -42,12 +44,14 @@ async def settings_command(message: Message):
 
 
 async def language_handler(callback: CallbackQuery):
+    response = ""
     if callback.data == "lang_ru":
         user_language[callback.from_user.id] = "ru"
-        await callback.message.answer("Выбранный язык: Русский")
+        response = "Выбранный язык: Русский 🇷🇺"
     elif callback.data == "lang_en":
         user_language[callback.from_user.id] = "en"
-        await callback.message.answer("Chosen Language: English")
+        response = "Chosen Language: English 🇬🇧"
+    await callback.message.edit_text(text=response)
     await callback.answer()
 
 
