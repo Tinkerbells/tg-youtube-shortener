@@ -1,2 +1,4 @@
 aiogram==3.0.0b7
 python-dotenv==1.0.0
+future==1.0.0
+

@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import re
+import aiohttp
 
 from aiogram import Bot, Dispatcher
 from aiogram.types import (
@@ -61,22 +62,14 @@ async def language_handler(callback: CallbackQuery):
         response = "Chosen Language: English 🇬🇧"
     await callback.message.edit_text(text=response)
     await callback.answer()
-    keyboard = InlineKeyboardMarkup(
-        inline_keyboard=[
-            [
-                InlineKeyboardButton(text="Русский", callback_data="lang_ru"),
-                InlineKeyboardButton(text="English", callback_data="lang_en"),
-            ]
-        ]
-    )
-    await message.answer("Выберите язык:", reply_markup=keyboard)
 
 
 # Функция отправления запроса к серверу для получения текста видео
 async def video_summarize(session, url):
+    print(url)
     try:
         async with session.post(
-            "http://127.0.0.1:5000/summarize", json={"video_url": url}, timeout=10
+            "http://127.0.0.1:5000/summarize", json={"url": url}, timeout=1000
         ) as response:
             if response.status == 200:
                 try:
